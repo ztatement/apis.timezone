@@ -1,0 +1,61 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Timezone API",
+    "version": "1.0.0",
+    "description": "Eine einfache API zur Abfrage von Zeitzonen und Zeitumrechnung."
+  },
+  "paths": {
+    "/timezones": {
+      "get": {
+        "summary": "Liste gängiger Zeitzonen",
+        "responses": {
+          "200": {
+            "description": "Liste der Zeitzonen"
+          }
+        }
+      }
+    },
+    "/timezones/all": {
+      "get": {
+        "summary": "Alle verfügbaren Zeitzonen",
+        "responses": {
+          "200": {
+            "description": "Liste aller Zeitzonen"
+          }
+        }
+      }
+    },
+    "/transitions": {
+      "get": {
+        "summary": "Liste der nächsten Zeitumstellungen",
+        "parameters": [
+          { "name": "tz", "in": "query", "required": true, "description": "IANA Zeitzone" },
+          { "name": "limit", "in": "query", "required": false, "schema": { "type": "integer", "default": 5 } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Liste der Umstellungen"
+          },
+          "404": {
+            "description": "Zeitzone nicht gefunden"
+          }
+        }
+      }
+    },
+    "/convert": {
+      "get": {
+        "summary": "Zeit zwischen Zeitzonen umrechnen",
+        "parameters": [
+          { "name": "from", "in": "query", "required": true },
+          { "name": "to", "in": "query", "required": true },
+          { "name": "time", "in": "query", "required": true }
+        ],
+        "responses": {
+          "200": { "description": "Ergebnis der Umrechnung" },
+          "400": { "description": "Fehlerhafte Parameter" }
+        }
+      }
+    }
+  }
+}
