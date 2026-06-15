@@ -1,0 +1,11 @@
+# Verhindert Verzeichnis-Listing
+Options -Indexes
+
+RewriteEngine On
+
+# Falls die angeforderte Ressource keine existierende Datei oder kein Ordner ist...
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# ... leite alles an tz.php weiter und hänge den Pfad hinten an
+RewriteRule ^(.*)$ tz.php/$1 [L,QSA]

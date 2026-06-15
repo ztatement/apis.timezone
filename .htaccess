@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Wenn die angeforderte URL keine existierende Datei oder kein Verzeichnis ist...
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# ...leite sie intern in den public-Ordner an die tz.php weiter
+RewriteRule ^(.*)$ public/tz.php/$1 [L,QSA]
